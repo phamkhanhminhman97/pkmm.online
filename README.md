@@ -2,7 +2,9 @@
 
 Trang web cá nhân và tài liệu mã nguồn mở của **Phạm Khánh Minh Mẫn** — xây dựng bằng **Next.js 16.2.6 (App Router)**, **Tailwind CSS v4**, **TypeScript 5** và xuất bản dưới dạng **Static Export (HTML/CSS/JS)** lên **Cloudflare Pages**. Giao diện được thiết kế theo phong cách báo chí học thuật (academic-editorial) sang trọng tối giản.
 
-🌐 **Website:** [https://pkmm.online](https://pkmm.online)
+🌐 **Website:** [
+pkmm-online.phamkhanhminhman97.workers.dev](
+pkmm-online.phamkhanhminhman97.workers.dev)
 
 ---
 
