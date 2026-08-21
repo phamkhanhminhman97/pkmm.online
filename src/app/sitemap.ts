@@ -24,14 +24,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...bilingual("/", 1, "weekly"),
     ...bilingual("/about", 0.8, "monthly"),
-    // Blog + project pages: MỘT URL duy nhất (nội dung không song ngữ),
-    // nên không khai alternates để tránh trùng nội dung.
-    ...blogPosts.map((post) => ({
-      url: `${BASE_URL}/blog/${post.slug}`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    })),
+    // Bài viết: chỉ khai những locale bài THẬT SỰ có bản dịch.
+    // Bài chỉ có tiếng Việt mà khai cả /blog/... lẫn /vi/blog/... thì Google
+    // thấy hai URL cùng nội dung -> tự chọn một, và có thể chọn sai.
+    ...blogPosts.flatMap((post) => {
+      const languages = Object.fromEntries(
+        post.availableIn.map((l) => [l, `${BASE_URL}${href(l, `/blog/${post.slug}`)}`]),
+      );
+      return post.availableIn.map((l) => ({
+        url: `${BASE_URL}${href(l, `/blog/${post.slug}`)}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly" as const,
+        priority: l === "en" ? 0.6 : 0.5,
+        ...(post.availableIn.length > 1 ? { alternates: { languages } } : {}),
+      }));
+    }),
     ...npmPackages.map((pkg) => ({
       url: `${BASE_URL}/projects/${pkg.id}`,
       lastModified: new Date(),

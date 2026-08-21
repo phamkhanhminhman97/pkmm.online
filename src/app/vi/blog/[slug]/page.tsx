@@ -4,7 +4,7 @@ import BlogArticle from "@/components/BlogArticle";
 import { blogPosts } from "@/data/blog";
 import { alternatesFor, ogLocaleFor } from "@/i18n/metadata";
 
-const LANG = "en" as const;
+const LANG = "vi" as const;
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));

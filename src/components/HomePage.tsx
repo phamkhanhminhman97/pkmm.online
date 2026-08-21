@@ -5,7 +5,8 @@ import Link from "next/link";
 import { blogPosts } from "@/data/blog";
 import { npmPackages } from "@/data/projects";
 import { profile } from "@/data/profile";
-import { type Locale, HTML_LANG } from "@/i18n/config";
+import { type Locale, HTML_LANG, href } from "@/i18n/config";
+import { formatDayMonth } from "@/lib/date";
 import { getDictionary } from "@/i18n/dictionary";
 import LangSwitch from "@/components/LangSwitch";
 
@@ -504,9 +505,7 @@ export default function HomePage({ lang }: { lang: Locale }) {
 
             <div className="flex flex-col gap-6">
               {blogPosts.map((post, postIdx) => {
-                const dateParts = post.date.split(" ");
-                const day = dateParts[0] || "23";
-                const month = dateParts.slice(1, 3).join(" ") || "Tháng 5";
+                const { day, month } = formatDayMonth(post.date, lang);
 
                 return (
                   <React.Fragment key={post.slug}>
@@ -519,13 +518,13 @@ export default function HomePage({ lang }: { lang: Locale }) {
                         </div>
                         <div>
                           <h3 className="font-sans font-bold text-[15px] group-hover:text-red-700 transition-colors">
-                            <Link href={`/blog/${post.slug}`} className="flex items-center gap-1">
-                              {post.title}
+                            <Link href={href(lang, `/blog/${post.slug}`)} className="flex items-center gap-1">
+                              {post.title[lang]}
                               <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                             </Link>
                           </h3>
                           <p className="font-serif-body text-[13.5px] text-zinc-600 mt-1 leading-relaxed">
-                            {post.description}
+                            {post.description[lang]}
                           </p>
                         </div>
                       </div>

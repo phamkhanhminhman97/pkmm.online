@@ -75,7 +75,17 @@ export interface Dictionary {
     orEmail: string;
   };
   notFound: { title: string; home: string; about: string };
-  blog: { badge: string; readOriginal: string; langNote: string };
+  blog: {
+    badge: string;
+    readOriginal: string;
+    langNote: string;
+    author: string;
+    authorBio: string;
+    otherPosts: string;
+    ctaTitle: string;
+    ctaBody: string;
+    ctaButton: string;
+  };
   footer: { rights: string; built: string };
   weather: Record<string, string> & { error: string };
 }
@@ -186,7 +196,15 @@ const en: Dictionary = {
     badge: "Vietnamese",
     readOriginal: "Read the article",
     langNote:
-      "These guides are written in Vietnamese — they target developers integrating Vietnamese e-commerce platforms.",
+      "This article is written in Vietnamese — it targets developers integrating Vietnamese e-commerce platforms.",
+    author: "Author",
+    authorBio:
+      "Backend engineer working on e-commerce automation and multi-marketplace API integration (Shopee, TikTok Shop, Lazada).",
+    otherPosts: "Other posts",
+    ctaTitle: "Need an integration?",
+    ctaBody:
+      "If you are building order or inventory sync against Shopee, TikTok Shop or Lazada, get in touch.",
+    ctaButton: "Email me",
   },
   footer: {
     rights: "All rights reserved.",
@@ -311,7 +329,15 @@ const vi: Dictionary = {
     badge: "Tiếng Việt",
     readOriginal: "Đọc bài viết",
     langNote:
-      "Các bài hướng dẫn này viết bằng tiếng Việt — dành cho lập trình viên tích hợp các sàn thương mại điện tử Việt Nam.",
+      "Bài này viết bằng tiếng Việt — dành cho lập trình viên tích hợp các sàn thương mại điện tử Việt Nam.",
+    author: "Tác giả",
+    authorBio:
+      "Kỹ sư backend làm về tự động hoá thương mại điện tử và tích hợp API đa sàn (Shopee, TikTok Shop, Lazada).",
+    otherPosts: "Bài viết khác",
+    ctaTitle: "Cần giải pháp tích hợp?",
+    ctaBody:
+      "Nếu bạn đang xây đồng bộ đơn hàng hoặc tồn kho với Shopee, TikTok Shop, Lazada — liên hệ để trao đổi.",
+    ctaButton: "Gửi email",
   },
   footer: {
     rights: "Bảo lưu mọi quyền.",

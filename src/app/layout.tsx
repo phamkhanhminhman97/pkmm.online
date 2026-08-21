@@ -71,7 +71,7 @@ const personJsonLd = {
   alternateName: "PKMM",
   url: SITE_URL,
   email: `mailto:${profile.email}`,
-  jobTitle: profile.title,
+  jobTitle: profile.title.en,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Đà Nẵng",
@@ -80,7 +80,7 @@ const personJsonLd = {
   sameAs: [profile.github, "https://www.npmjs.com/~phamkhanhminhman97"],
   alumniOf: profile.education.map((e) => ({
     "@type": "CollegeOrUniversity",
-    name: e.school,
+    name: e.school.en,
   })),
   knowsAbout: [
     ...profile.skills.flatMap((s) => s.items),

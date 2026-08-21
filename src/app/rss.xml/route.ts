@@ -1,5 +1,6 @@
 import { blogPosts } from "@/data/blog";
 import { SITE_URL } from "@/lib/site";
+import { parseISODate } from "@/lib/date";
 
 /**
  * RSS 2.0 cho blog. Static export chỉ hỗ trợ GET và render sẵn lúc build
@@ -7,15 +8,6 @@ import { SITE_URL } from "@/lib/site";
  * nên không đọc gì từ request.
  */
 export const dynamic = "force-static";
-
-/** Ngày trong data ghi kiểu "23 Tháng 5, 2026" -> Date. */
-function parseVietnameseDate(input: string): Date | null {
-  const m = input.match(/(\d{1,2})\s*Tháng\s*(\d{1,2}),\s*(\d{4})/i);
-  if (!m) return null;
-  const [, day, month, year] = m;
-  const d = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day)));
-  return Number.isNaN(d.getTime()) ? null : d;
-}
 
 /** RSS là XML: năm ký tự này phải escape, nếu không feed hỏng ở tiêu đề có & hoặc <. */
 function xmlEscape(s: string): string {
@@ -29,17 +21,17 @@ function xmlEscape(s: string): string {
 
 export async function GET() {
   const items = blogPosts
-    .map((post) => ({ post, date: parseVietnameseDate(post.date) }))
-    .sort((a, b) => (b.date?.getTime() ?? 0) - (a.date?.getTime() ?? 0))
+    .map((post) => ({ post, date: parseISODate(post.date) }))
+    .sort((a, b) => b.date.getTime() - a.date.getTime())
     .map(({ post, date }) => {
       const url = `${SITE_URL}/blog/${post.slug}`;
       return `    <item>
-      <title>${xmlEscape(post.title)}</title>
+      <title>${xmlEscape(post.title.en)}</title>
       <link>${url}</link>
       <guid isPermaLink="true">${url}</guid>
-      <description>${xmlEscape(post.description)}</description>
+      <description>${xmlEscape(post.description.en)}</description>
       <category>${xmlEscape(post.category)}</category>${
-        date ? `\n      <pubDate>${date.toUTCString()}</pubDate>` : ""
+        `\n      <pubDate>${date.toUTCString()}</pubDate>`
       }
     </item>`;
     })
