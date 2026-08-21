@@ -13,11 +13,11 @@ export default function NotFound() {
         {/* Message */}
         <div className="-mt-8 md:-mt-12 mb-8">
           <h2 className="text-xl md:text-2xl font-sans font-bold text-zinc-900">
-            Trang không tìm thấy
+            Page not found
           </h2>
           <p className="font-serif-body text-[15px] text-zinc-600 mt-3 max-w-md mx-auto leading-relaxed">
-            Trang bạn đang tìm kiếm có thể đã bị di chuyển, xóa hoặc không tồn
-            tại. Hãy kiểm tra lại đường dẫn hoặc quay về trang chủ.
+            The page you are looking for may have been moved, deleted, or never
+            existed. Check the URL, or head back to the homepage.
           </p>
         </div>
 
@@ -41,7 +41,7 @@ export default function NotFound() {
               <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
               <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
-            Về trang chủ
+            Back to home
           </Link>
           <Link
             href="/about"
@@ -61,7 +61,7 @@ export default function NotFound() {
               <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
               <circle cx="12" cy="7" r="4" />
             </svg>
-            Giới thiệu
+            About
           </Link>
         </div>
 

@@ -209,7 +209,7 @@ app.post(
 );`}
         </pre>
 
-        <h3 className="font-sans font-bold text-lg text-black pt-4">3. Chiến thuật phản hồi nhanh: "Respond Fast, Fetch Later"</h3>
+        <h3 className="font-sans font-bold text-lg text-black pt-4">3. Chiến thuật phản hồi nhanh: &ldquo;Respond Fast, Fetch Later&rdquo;</h3>
         <p>
           Shopee quy định thời gian timeout cho một request webhook là <strong>3 giây</strong>. Nếu server của bạn xử lý quá chậm (ví dụ: thực hiện ghi đè DB nhiều bảng, kiểm tra logic phức tạp), Shopee sẽ đánh giá request thất bại và liên tục gửi lại webhook (Retry theo chu kỳ 300 giây, 1800 giây, 10800 giây).
         </p>

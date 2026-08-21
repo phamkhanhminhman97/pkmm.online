@@ -22,14 +22,14 @@ export async function generateMetadata({
   const post = blogPosts.find((p) => p.slug === slug);
 
   if (!post) {
-    return { title: "Bài viết không tìm thấy — PKMM.ONLINE" };
+    return { title: "Bài viết không tìm thấy" };
   }
 
   return {
-    title: `${post.title} — PKMM.ONLINE Blog`,
+    title: post.title,
     description: post.description,
     openGraph: {
-      title: `${post.title} — PKMM.ONLINE Blog`,
+      title: post.title,
       description: post.description,
       type: "article",
     },

@@ -32,14 +32,14 @@ export async function generateMetadata({
   const pkg = getPackageBySlug(slug);
 
   if (!pkg) {
-    return { title: "Project Not Found — PKMM.ONLINE" };
+    return { title: "Project Not Found" };
   }
 
   return {
-    title: `${pkg.name} — PKMM.ONLINE`,
+    title: pkg.name,
     description: pkg.description,
     openGraph: {
-      title: `${pkg.name} — PKMM.ONLINE`,
+      title: pkg.name,
       description: pkg.description,
       type: "website",
     },

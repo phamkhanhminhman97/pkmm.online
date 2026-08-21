@@ -17,11 +17,73 @@ pkmm-online.phamkhanhminhman97.workers.dev)
 - **🕒 Clock & Weather Widget:** Đồng hồ hệ thống tự động cập nhật và widget thời tiết thời gian thực tại TP. Hồ Chí Minh sử dụng Open-Meteo API.
 - **📊 Thống kê npm:** Tự động kết nối npm Registry API để hiển thị số lượt tải các thư viện mỗi tuần.
 - **🎨 Hình ảnh AI Độc quyền:** Ảnh minh họa bàn làm việc dạng pixel-art và avatar cá nhân phong cách 8-bit từ AI.
-- **📬 Form liên hệ không Backend:** Tích hợp Web3Forms — gửi email trực tiếp không cần server.
+- **🌐 Song ngữ, mặc định tiếng Anh:** `/` là **English**, `/vi` là tiếng Việt, có công tắc `EN / VI` ở header. Kèm `hreflang` + `x-default` trong `<head>` và trong `sitemap.xml`.
+- **🖥️ Systems Section:** ba hệ thống đang làm, mô tả **kỹ thuật, ẩn danh khách hàng** (`profile.systems`).
+- **🔬 Research Section:** Mục nghiên cứu sau đại học (câu hỏi · phương pháp · trạng thái trung thực · từ khoá) trên cả trang chủ và trang About.
+- **📬 Form liên hệ không Backend:** Web3Forms qua biến môi trường; chưa cấu hình thì tự rơi về `mailto:`.
+- **🔎 SEO nâng cao:** `metadataBase`, OpenGraph, Twitter Card, title template, và **JSON-LD `Person` schema** (quyết định Google hiển thị ra sao khi ai đó gõ đúng tên).
+- **♿ Skip-link** tới `<main id="main">` cho người dùng bàn phím.
 - **⚡ Static Export siêu nhẹ:** Toàn bộ website là file tĩnh, lý tưởng cho Cloudflare Pages (tải trang siêu nhanh, 0% RAM server, bảo mật tuyệt đối).
 - **🚫 Custom 404 Page:** Trang báo lỗi 404 được thiết kế riêng.
 
 ---
+
+## ⚠️ Quy tắc nội dung — đọc trước khi sửa `profile.tsx`
+
+**1. Không nêu tên khách hàng.** Mảng `systems` mô tả *loại hệ thống và phần kỹ thuật*, không
+nêu tên công ty khách hàng, tên module nội bộ, hay mã ticket. Đây là công việc có ràng buộc bảo mật.
+
+**2. Không tuyên bố quá thực tế.** Mục `research` là **nghiên cứu độc lập, chưa chốt làm đề tài
+luận văn** — `venue` và `honestNote` phải giữ đúng như vậy. Khi nào GVHD duyệt thì mới đổi.
+
+**3. Experience = 1 câu tóm tắt + 2-4 gạch đầu dòng.** Không viết đoạn văn dài. Trường `summary`
+trả lời *"hệ thống đó là gì"*, `highlights` trả lời *"mình đã làm gì"* — ưu tiên thứ đo được.
+
+## Song ngữ — cách hoạt động
+
+```
+/            → English  (mặc định, không có tiền tố)
+/about       → English
+/vi          → Tiếng Việt
+/vi/about    → Tiếng Việt
+/blog/*      → MỘT URL, nội dung tiếng Việt (đánh dấu lang="vi")
+/projects/*  → MỘT URL, mô tả gói vốn đã bằng tiếng Anh
+```
+
+**Vì sao blog/projects không nhân đôi:** nội dung của chúng không song ngữ. Tạo `/vi/blog/...`
+chỉ để đổi phần khung sẽ sinh **trùng nội dung** cho SEO. Thay vào đó trang chủ bản EN hiện một
+ghi chú nói rõ các bài viết bằng tiếng Việt.
+
+**Không có tự động chuyển theo trình duyệt.** Static export không chạy được Proxy/middleware
+(xem `node_modules/next/dist/docs/01-app/02-guides/static-exports.md`), nên công tắc `EN / VI`
+ở header là lối vào duy nhất — phải luôn hiển thị.
+
+| File | Vai trò |
+|---|---|
+| `src/i18n/config.ts` | danh sách locale, `href(lang, path)`, `HTML_LANG` |
+| `src/i18n/dictionary.ts` | **toàn bộ chữ giao diện**, hai bản EN/VI |
+| `src/i18n/metadata.ts` | `alternatesFor()` sinh `hreflang` + canonical |
+| `src/i18n/types.ts` | `Localized<T> = { en: T; vi: T }` |
+| `src/data/profile.tsx` | dữ liệu dùng `Localized<>` ở đúng trường khác nhau |
+| `src/components/HomePage.tsx` · `AboutPage.tsx` | nhận prop `lang`, route chỉ là vỏ mỏng |
+
+Thêm chữ mới: khai trong `Dictionary` (TypeScript sẽ bắt buộc điền **cả hai** ngôn ngữ).
+
+## Ảnh Open Graph
+
+`src/app/opengraph-image.png` (1200×630) theo [file convention của Next](node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/01-metadata/opengraph-image.md) —
+Next tự sinh `og:image`, `width`, `height`, `type`. Nguồn để sửa lại: `tools/og-image.html`.
+
+Dựng lại sau khi sửa HTML:
+
+```bash
+npm run dev                     # cần dev server đang chạy
+cp tools/og-image.html public/__og.html
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu \
+  --hide-scrollbars --window-size=1200,630 \
+  --screenshot=src/app/opengraph-image.png http://localhost:3000/__og.html
+cp src/app/opengraph-image.png src/app/twitter-image.png && rm public/__og.html
+```
 
 ## Cấu Trúc Dự Án
 
@@ -90,13 +152,69 @@ src/
 
 ## Cấu Hình Cần Lưu Ý
 
-### Web3Forms Access Key
-Form liên hệ ở trang chủ sử dụng Web3Forms. Cần thay `YOUR_ACCESS_KEY_HERE` bằng access key thật trong file:
-[`src/app/page.tsx`](src/app/page.tsx:585)
+### Web3Forms Access Key (form liên hệ)
+
+Copy `.env.example` → `.env.local` rồi điền key lấy ở <https://web3forms.com>:
+
+```bash
+NEXT_PUBLIC_WEB3FORMS_KEY=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+```
+
+#### 🔴 Trên Cloudflare — đọc kỹ, chỗ này dễ nhầm
+
+Dự án này là **Worker chỉ có static assets** (`wrangler.jsonc` có `assets`, không có `main`).
+Dashboard sẽ báo:
+
+> *"Variables cannot be added to a Worker that only has static assets."*
+
+**Đúng, và không sao cả** — vì `NEXT_PUBLIC_*` là biến **LÚC BUILD**, không phải lúc chạy.
+Nó bị nhúng thẳng vào file JS khi `next build`. Biến runtime của Cloudflare **không bao giờ**
+dùng được cho nó, kể cả nếu dashboard có cho thêm.
+
+Kiểm chứng:
+
+```bash
+NEXT_PUBLIC_WEB3FORMS_KEY= npm run build && grep -rl "<key>" out/   # -> 0 file
+npm run build                            && grep -rl "<key>" out/   # -> 1 file
+```
+
+**Hai đường deploy, chọn một:**
+
+| | Cần làm gì |
+|---|---|
+| **Build ở máy** *(khuyến nghị — đơn giản nhất)* | `npm run deploy` — build tại chỗ với `.env.local` rồi `wrangler deploy`. Cloudflare chỉ phục vụ file tĩnh, **không cần cấu hình biến gì cả** |
+| **Cloudflare tự build** (Git integration) | Đặt biến ở **Workers Builds → Build variables** — mục khác hẳn với *Variables and secrets* ở ảnh trên |
+
+`npm run build` chạy `prebuild` → `scripts/check-build-env.mjs`, in cảnh báo khung vàng nếu
+thiếu khoá. Không có nó thì rất dễ deploy một bản không có form mà không ai nhận ra, vì trang
+vẫn build và chạy bình thường.
+
+> ⚠️ **Key này KHÔNG bí mật, và không thể bí mật.** Đây là static export nên `NEXT_PUBLIC_*`
+> được **nhúng thẳng vào file JS** lúc build — kiểm được:
+> ```bash
+> grep -rl "$NEXT_PUBLIC_WEB3FORMS_KEY" out/_next/static/chunks/
+> ```
+> Web3Forms thiết kế như vậy: key dùng ở phía client, và họ **chặn POST từ server** (gọi bằng
+> `curl` sẽ nhận `"This method is not allowed"`) — đó chính là cơ chế chống lạm dụng của họ.
+>
+> Vậy để `.env.local` (gitignored) có tác dụng gì? **Giữ key khỏi lịch sử git.** Repo public bị
+> scrape liên tục; key nằm trong bundle thì chỉ người vào site mới thấy, nằm trong git history
+> thì tồn tại vĩnh viễn. Nếu bị spam: tạo key mới ở Web3Forms, đổi biến môi trường, build lại.
+
+**Không có key thì trang vẫn chạy đúng:** phần liên hệ tự chuyển sang nút `mailto:` thay vì hiện
+một form gửi vào hư không.
+
+**Cách form hoạt động** (`HomePage.tsx` → `onSubmitContact`): gửi bằng `fetch` nên người dùng
+**ở lại trang** — có trạng thái `sending` (khoá nút), thông báo thành công/thất bại song ngữ
+trong vùng `aria-live`, tự xoá form khi thành công, và nếu lỗi thì hiện luôn địa chỉ email để
+gửi tay. Ô `botcheck` ẩn là honeypot của Web3Forms, đừng xoá.
 
 ### Cập nhật thông tin cá nhân
-Thông tin profile (kinh nghiệm, kỹ năng, học vấn) nằm ở:
+Thông tin profile (kinh nghiệm, kỹ năng, học vấn, **research**) nằm ở:
 [`src/data/profile.tsx`](src/data/profile.tsx)
+
+Mảng `research` đổ ra **hai chỗ**: card trên trang chủ (`#research`) và mục đầy đủ ở `/about`.
+Để mảng rỗng thì cả hai mục tự ẩn — không cần sửa JSX.
 
 ### Danh sách thư viện npm
 Dữ liệu các package (tên, mô tả, code examples) nằm ở:
