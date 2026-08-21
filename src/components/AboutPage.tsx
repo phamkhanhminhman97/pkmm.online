@@ -68,11 +68,17 @@ export default function AboutPage({ lang }: { lang: Locale }) {
             <div className="flex flex-col sm:flex-row gap-6 items-start p-4">
               <div className="shrink-0 mx-auto sm:mx-0">
                 <div className="border border-zinc-300 p-1.5 bg-white rounded-full">
-                  <img
-                    src="/assets/avatar.png"
-                    alt="Phạm Khánh Minh Mẫn Avatar"
-                    className="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover"
-                  />
+                  <picture>
+                    <source srcSet="/assets/avatar.webp" type="image/webp" />
+                    <img
+                      src="/assets/avatar.png"
+                      alt={d.home.avatarAlt}
+                      width={384}
+                      height={384}
+                      fetchPriority="high"
+                      className="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover"
+                    />
+                  </picture>
                 </div>
               </div>
               <div className="flex-grow text-center sm:text-left">
@@ -199,7 +205,23 @@ export default function AboutPage({ lang }: { lang: Locale }) {
               <div className="space-y-5">
                 {profile.systems.map((s) => (
                   <article key={s.name.en} className="border-l-2 border-zinc-300 pl-4">
-                    <h3 className="font-sans font-bold text-sm text-zinc-900">{s.name[lang]}</h3>
+                    <h3 className="font-sans font-bold text-sm text-zinc-900">
+                      {s.url ? (
+                        <a
+                          href={s.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline underline-offset-4 decoration-zinc-400"
+                        >
+                          {s.name[lang]}
+                          <span className="font-mono text-[10px] text-zinc-400 ml-1.5">
+                            {s.url.replace(/^https?:\/\//, "")} ↗
+                          </span>
+                        </a>
+                      ) : (
+                        s.name[lang]
+                      )}
+                    </h3>
                     <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">
                       {s.domain[lang]}
                     </p>

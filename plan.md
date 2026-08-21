@@ -136,50 +136,57 @@ graph LR
 
 ---
 
-## Phần 3: Danh sách công việc chi tiết (Todo)
+## Phần 3: Trạng thái & việc còn lại
 
-### Phase 1: GitHub Improvement (Ưu tiên cao - có thể làm ngay)
+> **Cập nhật 2026-08-21.** Trước bản này, Phase 2-5 dưới đây đều đánh dấu `[ ]` chưa làm
+> trong khi site đã chạy từ lâu — tài liệu tự khai sai còn tệ hơn không có tài liệu.
+> Mục "còn lại" chỉ giữ việc **có số đo hoặc kiểm chứng được**; không có mục chung chung
+> kiểu "cải thiện hiệu năng", vì mục như vậy không bao giờ được tick.
 
-- [x] **1.1** Tạo GitHub Profile README repo `phamkhanhminhman97`
-  - Đã tạo template tại [`plans/github-profile-readme.md`](./github-profile-readme.md). Cần copy sang repo đặc biệt `phamkhanhminhman97/phamkhanhminhman97`.
-- [x] **1.2** Thêm badges vào README các package
-- [x] **1.3** Thêm Issue/PR templates
-- [x] **1.4** Cải thiện CI/CD
-  - Đã thêm `npm test` step và release workflow theo tag `v*`.
-  - Đã thêm `npm run coverage` bằng Node test runner, hiện cover unit tests cho Shopee Push/Webhook utilities.
-- [x] **1.5** Thêm Code of Conduct & Contributing Guide
+### ✅ Đã xong
 
-### Phase 2: Website Foundation
+**Phase 1 — GitHub**
+- [x] Profile README · badges · Issue/PR templates · CI/CD + coverage · CoC & Contributing
 
-- [ ] **2.1** Khởi tạo Next.js project với Tailwind CSS
-- [ ] **2.2** Cấu hình Vercel deployment + domain pkmm.online
-- [ ] **2.3** Xây dựng layout cơ bản (Header, Footer, Navigation)
-- [ ] **2.4** Tạo Landing Page với Hero section
-- [ ] **2.5** Tạo trang Projects listing
+**Phase 2-4 — Website**
+- [x] Next.js + Tailwind, **triển khai trên Cloudflare** *(kế hoạch cũ ghi Vercel — đã đổi)*
+- [x] Layout, landing page, trang danh sách projects
+- [x] 4 trang chi tiết package (Shopee · TikTok Shop · Lazada · All-in-One)
+- [x] Blog (3 bài) · trang About/CV · form liên hệ
 
-### Phase 3: Project Pages
+**Phase 5 — Polish**
+- [x] SEO: `metadataBase`, OpenGraph, Twitter card, canonical, sitemap phân mảnh
+- [x] Ảnh OG 1200×630 theo file convention của Next
+- [x] JSON-LD `Person` schema
+- [x] Analytics (GA4, tôn trọng Do Not Track)
 
-- [ ] **3.1** Trang Shopee API Client chi tiết
-- [ ] **3.2** Trang TikTok Shop API Client chi tiết
-- [ ] **3.3** Trang Lazada API Client chi tiết
-- [ ] **3.4** Trang All-in-One Package chi tiết
+**Ngoài kế hoạch ban đầu**
+- [x] **Song ngữ EN/VI** — `/` tiếng Anh mặc định, `/vi` tiếng Việt, hreflang + x-default
+- [x] Mục **Research** và **Systems** ở trang About
+- [x] Form liên hệ qua biến môi trường; thiếu khoá thì tự rơi về `mailto:`
+- [x] **RSS feed** `/rss.xml` + autodiscovery trong `<head>`
+- [x] Trang 404 song ngữ
+- [x] **Tối ưu ảnh**: WebP + `<picture>`, resize theo kích thước hiển thị thật
+      → payload trang chủ **2.581 KB → 1.013 KB (−61%)**
+- [x] Skip-link, `width`/`height` chống layout shift, `loading="lazy"` cho logo
 
-### Phase 4: Blog & About
+### Còn lại
 
-- [ ] **4.1** Tích hợp MDX/blog system
-- [ ] **4.2** Viết 2-3 bài blog đầu tiên
-- [ ] **4.3** Tạo trang About / CV
-- [ ] **4.4** Thêm Contact form
+- [ ] **Đổi domain sang `phamkhanhminhman.com`** — `.online` renew ~$50/năm;
+      `.com` $10,46/năm cố định. Đã kiểm còn trống 2026-08-21.
+      Cách chuyển: chạy song song → 301 từ `.online` → để hết hạn tự nhiên.
+- [ ] **Blog đã 90 ngày không có bài mới** (mới nhất 23/05/2026). RSS giờ đã có,
+      nhưng feed không có gì mới thì không ai theo dõi.
+- [ ] Dark mode (`prefers-color-scheme`)
+- [ ] Điền **số đo thật** vào Experience — hiện 0/20 gạch đầu dòng có số
+      (thông lượng, số đơn/ngày, p95 trước-sau). Chỉ tác giả mới có số này.
+- [ ] Ảnh OG riêng cho trang blog/project *(giờ mọi trang dùng chung một ảnh)*
 
-### Phase 5: Polish & Launch
+### Không làm, và vì sao
 
-- [ ] **5.1** SEO optimization (meta tags, sitemap, OG images)
-- [ ] **5.2** Responsive testing
-- [ ] **5.3** Performance optimization
-- [ ] **5.4** Analytics integration
-- [ ] **5.5** Launch announcement trên GitHub & social
-
----
+- **Nén PNG dự phòng**: đã thử giảm bảng màu (256 màu vẫn đổi 16,6% pixel) và nén
+  lossless (Pillow làm file *to hơn*). PNG chỉ là fallback cho trình duyệt không đọc
+  được WebP — gần như không tồn tại năm 2026 — nên không đáng đánh đổi chất lượng.
 
 ## Lợi ích mang lại
 

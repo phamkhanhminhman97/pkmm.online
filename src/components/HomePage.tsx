@@ -285,11 +285,19 @@ export default function HomePage({ lang }: { lang: Locale }) {
           {/* HERO ILLUSTRATION */}
           <section className="w-full border border-zinc-300 p-2 bg-white shadow-sm">
             <div className="relative w-full aspect-[4/3] overflow-hidden bg-zinc-100">
-              <img
-                src="/assets/hero.png"
-                alt={t.heroAlt}
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]"
-              />
+              {/* Ảnh màn hình đầu -> quyết định LCP: eager + fetchPriority cao.
+                  width/height đặt theo file thật để trình duyệt giữ chỗ, không giật layout. */}
+              <picture>
+                <source srcSet="/assets/hero.webp" type="image/webp" />
+                <img
+                  src="/assets/hero.png"
+                  alt={t.heroAlt}
+                  width={1024}
+                  height={1024}
+                  fetchPriority="high"
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+                />
+              </picture>
             </div>
             <div className="mt-2 text-center font-mono text-[10px] md:text-xs text-zinc-500 uppercase tracking-widest py-1 border-t border-zinc-200">
               {t.kicker}
@@ -303,11 +311,17 @@ export default function HomePage({ lang }: { lang: Locale }) {
               {/* Profile Image Wrapper */}
               <div className="flex-shrink-0 mx-auto md:mx-0">
                 <div className="border border-zinc-300 p-1.5 bg-white rounded-full">
-                  <img
-                    src="/assets/avatar.png"
-                    alt="Phạm Khánh Minh Mẫn Avatar"
-                    className="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover"
-                  />
+                  <picture>
+                    <source srcSet="/assets/avatar.webp" type="image/webp" />
+                    <img
+                      src="/assets/avatar.png"
+                      alt={d.home.avatarAlt}
+                      width={384}
+                      height={384}
+                      fetchPriority="high"
+                      className="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover"
+                    />
+                  </picture>
                 </div>
               </div>
 

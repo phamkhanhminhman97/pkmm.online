@@ -10,15 +10,25 @@ export default function NotFound() {
           404
         </h1>
 
-        {/* Message */}
-        <div className="-mt-8 md:-mt-12 mb-8">
-          <h2 className="text-xl md:text-2xl font-sans font-bold text-zinc-900">
-            Page not found
-          </h2>
-          <p className="font-serif-body text-[15px] text-zinc-600 mt-3 max-w-md mx-auto leading-relaxed">
-            The page you are looking for may have been moved, deleted, or never
-            existed. Check the URL, or head back to the homepage.
-          </p>
+        {/* Song ngữ: not-found.tsx phục vụ MỌI 404 kể cả /vi/*, mà static export
+            không biết locale của URL hỏng -> hiển thị cả hai thay vì đoán. */}
+        <div className="-mt-8 md:-mt-12 mb-8 space-y-5">
+          <div lang="en">
+            <h2 className="text-xl md:text-2xl font-sans font-bold text-zinc-900">
+              Page not found
+            </h2>
+            <p className="font-serif-body text-[15px] text-zinc-600 mt-2 max-w-md mx-auto leading-relaxed">
+              This page may have been moved, deleted, or never existed.
+            </p>
+          </div>
+          <div lang="vi" className="pt-4 border-t border-zinc-200 max-w-md mx-auto">
+            <h2 className="text-lg md:text-xl font-sans font-bold text-zinc-700">
+              Không tìm thấy trang
+            </h2>
+            <p className="font-serif-body text-[15px] text-zinc-600 mt-2 leading-relaxed">
+              Trang này có thể đã được chuyển, đã xoá, hoặc chưa từng tồn tại.
+            </p>
+          </div>
         </div>
 
         {/* Actions */}
@@ -41,7 +51,14 @@ export default function NotFound() {
               <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
               <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
-            Back to home
+            Home / Trang chủ
+          </Link>
+          <Link
+            href="/vi"
+            hrefLang="vi"
+            className="inline-flex items-center gap-2 px-6 py-2.5 border border-zinc-300 text-zinc-700 text-sm font-sans rounded-lg hover:bg-zinc-50 transition-colors"
+          >
+            Tiếng Việt
           </Link>
           <Link
             href="/about"
@@ -61,7 +78,7 @@ export default function NotFound() {
               <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
               <circle cx="12" cy="7" r="4" />
             </svg>
-            About
+            About / Giới thiệu
           </Link>
         </div>
 

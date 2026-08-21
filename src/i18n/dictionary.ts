@@ -16,6 +16,7 @@ export interface Dictionary {
     metaDescription: string;
     kicker: string;
     heroAlt: string;
+    avatarAlt: string;
     intro: string[];
     sectionPackages: string;
     sectionPackagesNote: string;
@@ -97,6 +98,7 @@ const en: Dictionary = {
       "Backend engineer (NestJS, PostgreSQL, Redis, AWS) with 5+ years in e-commerce, author of the open-source Shopee / TikTok Shop / Lazada API clients. Graduate researcher on graph memory for LLM agents at Danang University of Science and Technology.",
     kicker: "API INTEGRATION • E-COMMERCE AUTOMATION • APPLIED AI RESEARCH",
     heroAlt: "Pixel-art illustration of a developer workspace",
+    avatarAlt: "Portrait of Phạm Khánh Minh Mẫn",
     intro: [
       "Backend engineer, 5 years on e-commerce systems and multi-marketplace API integration.",
       "I write and maintain open-source clients for the Shopee, TikTok Shop and Lazada Open APIs — request signing, token refresh, webhooks.",
@@ -146,7 +148,7 @@ const en: Dictionary = {
     sectionEducation: "Education",
     sectionSkills: "Skills",
     systemsNote:
-      "Client work. System and engineering described; client names withheld.",
+      "Client names are withheld where the work is under contract; the public project links out.",
     cv: "Curriculum Vitae",
     cvBody:
       "A downloadable CV with the full work history and skill breakdown is coming.",
@@ -221,6 +223,7 @@ const vi: Dictionary = {
       "Kỹ sư backend (NestJS, PostgreSQL, Redis, AWS) với 5+ năm kinh nghiệm thương mại điện tử, tác giả các thư viện mã nguồn mở Shopee / TikTok Shop / Lazada API. Học viên cao học nghiên cứu bộ nhớ đồ thị cho tác tử LLM tại ĐH Bách khoa Đà Nẵng.",
     kicker: "TÍCH HỢP API • TỰ ĐỘNG HOÁ E-COMMERCE • NGHIÊN CỨU AI ỨNG DỤNG",
     heroAlt: "Minh hoạ pixel-art góc làm việc của lập trình viên",
+    avatarAlt: "Ảnh chân dung Phạm Khánh Minh Mẫn",
     intro: [
       "Kỹ sư backend, 5 năm làm hệ thống thương mại điện tử và tích hợp API đa sàn.",
       "Viết và duy trì các thư viện mã nguồn mở cho Open API của Shopee, TikTok Shop và Lazada — ký request, refresh token, webhook.",
@@ -270,7 +273,7 @@ const vi: Dictionary = {
     sectionEducation: "Học vấn",
     sectionSkills: "Kỹ năng",
     systemsNote:
-      "Dự án khách hàng. Mô tả hệ thống và phần kỹ thuật; không nêu tên khách hàng.",
+      "Phần làm cho khách hàng thì không nêu tên; dự án công khai có link dẫn ra ngoài.",
     cv: "Hồ sơ năng lực",
     cvBody:
       "Bản CV đầy đủ về kinh nghiệm làm việc và kỹ năng chuyên môn sẽ sớm có.",

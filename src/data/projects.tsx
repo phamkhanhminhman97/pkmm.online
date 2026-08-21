@@ -55,11 +55,18 @@ export const npmPackages: NpmPackageInfo[] = [
       "https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/tree/main/packages/shopee-api-client#readme",
     defaultDownloads: 1240,
     icon: (
-      <img
-        src="/assets/shopee-logo.png"
-        alt="Shopee"
-        className="w-6 h-6 object-contain"
-      />
+      <picture>
+        <source srcSet="/assets/shopee-logo.webp" type="image/webp" />
+        <img
+          src="/assets/shopee-logo.png"
+          alt="Shopee"
+          width={96}
+          height={96}
+          loading="lazy"
+          decoding="async"
+          className="w-6 h-6 object-contain"
+        />
+      </picture>
     ),
     codeExamples: [
       {
@@ -137,11 +144,18 @@ if (isValid) {
       "https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/tree/main/packages/tiktokshops-api-client#readme",
     defaultDownloads: 890,
     icon: (
-      <img
-        src="/assets/tiktokshops-logo.png"
-        alt="TikTok Shop"
-        className="w-6 h-6 object-contain"
-      />
+      <picture>
+        <source srcSet="/assets/tiktokshops-logo.webp" type="image/webp" />
+        <img
+          src="/assets/tiktokshops-logo.png"
+          alt="TikTok Shop"
+          width={96}
+          height={96}
+          loading="lazy"
+          decoding="async"
+          className="w-6 h-6 object-contain"
+        />
+      </picture>
     ),
     codeExamples: [
       {
@@ -221,11 +235,18 @@ const newProduct = await tiktok.createProduct({
       "https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-monorepo/tree/main/packages/lazada-api-client#readme",
     defaultDownloads: 620,
     icon: (
-      <img
-        src="/assets/lazada-logo.png"
-        alt="Lazada"
-        className="w-6 h-6 object-contain"
-      />
+      <picture>
+        <source srcSet="/assets/lazada-logo.webp" type="image/webp" />
+        <img
+          src="/assets/lazada-logo.png"
+          alt="Lazada"
+          width={96}
+          height={96}
+          loading="lazy"
+          decoding="async"
+          className="w-6 h-6 object-contain"
+        />
+      </picture>
     ),
     codeExamples: [
       {

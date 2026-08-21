@@ -13,6 +13,13 @@ export function alternatesFor(lang: Locale, path: string): Metadata["alternates"
       ...Object.fromEntries(LOCALES.map((l) => [l, href(l, path)])),
       "x-default": href("en", path),
     },
+    // Phải khai ở ĐÂY, không phải ở root layout: metadata của page thay thế
+    // nguyên khối `alternates` của layout, nên link RSS đặt ở root sẽ biến mất.
+    types: {
+      "application/rss+xml": [
+        { url: "/rss.xml", title: "PKMM.ONLINE — Technical Blog" },
+      ],
+    },
   };
 }
 

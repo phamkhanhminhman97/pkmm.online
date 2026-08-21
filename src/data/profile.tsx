@@ -17,6 +17,8 @@ export interface Experience {
 export interface SystemWork {
   name: Localized<string>;
   domain: Localized<string>;
+  /** Chỉ dự án CÔNG KHAI mới có link. Dự án khách hàng để trống. */
+  url?: string;
   summary: Localized<string>;
   highlights: Localized<string[]>;
   technologies: string[];
@@ -266,6 +268,28 @@ export const profile: ProfileData = {
         ],
       },
       technologies: ["GitHub Actions", "Docker Buildx", "AWS ECR", "AWS ECS", "ALB", "Docker Compose"],
+    },
+    {
+      name: { en: "BattleCatsLab", vi: "BattleCatsLab" },
+      domain: { en: "Personal project · public", vi: "Dự án cá nhân · công khai" },
+      url: "https://battlecatslab.fun",
+      summary: {
+        en: "Data and simulation site for a mobile game — 9,000 generated pages, a deterministic battle engine, and server-authoritative realtime PvP.",
+        vi: "Trang dữ liệu và mô phỏng cho một game mobile — 9.000 trang sinh tự động, engine chiến đấu tất định, và PvP thời gian thực do server quyết định.",
+      },
+      highlights: {
+        en: [
+          "Server owns the sim and ticks it at 30 Hz; clients send deploy intents and render snapshots, so a client cannot fake a result.",
+          "Ranked ELO gate treats same-IP as telemetry only — shared Wi-Fi must not invalidate a real match; the abuse lockout derives from an append-only log, not a mutable counter.",
+          "A golden-vector test pins fixed team pairs to their exact winner and frame count, so an engine change that would desync stored replays fails CI instead of corrupting them silently.",
+        ],
+        vi: [
+          "Server giữ bộ mô phỏng và chạy ở 30 Hz; client chỉ gửi ý định triển khai và vẽ lại snapshot, nên không thể làm giả kết quả.",
+          "Cổng ELO xếp hạng coi trùng IP chỉ là telemetry — dùng chung Wi-Fi không được phép huỷ một trận thật; khoá lạm dụng suy ra từ log chỉ-ghi-thêm, không phải bộ đếm sửa được.",
+          "Test golden-vector ghim sẵn từng cặp đội với đúng người thắng và số frame, nên thay đổi engine làm lệch replay đã lưu sẽ fail CI thay vì hỏng âm thầm.",
+        ],
+      },
+      technologies: ["TypeScript", "React", "Vite", "SQLite", "Cloudflare Workers", "Cloudflare R2", "SSE"],
     },
     {
       name: { en: "Virtual factory / production scheduling", vi: "Nhà máy ảo / lập lịch sản xuất" },

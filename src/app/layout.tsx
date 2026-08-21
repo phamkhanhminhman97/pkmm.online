@@ -39,7 +39,6 @@ export const metadata: Metadata = {
     "Graph memory",
     "Knowledge graph retrieval",
   ],
-  alternates: { canonical: "/" },
   openGraph: {
     type: "profile",
     locale: "en_US",
